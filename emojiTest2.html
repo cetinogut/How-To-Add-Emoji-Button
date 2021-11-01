@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dastugo-EmojiTest</title>
+    <style>
+    .btnemoji {
+        width: 70px;
+        height: 45px;
+        float: right;
+        border: none;
+        background: none;
+        outline: none;
+        font-size: 30px;
+        filter: grayscale(100%);
+    } 
+    .container{
+        width: 600px;
+        margin: 20px auto;
+    }
+    .textarea{
+        width: 100%;
+        height: 500px;
+        font-size: 20pt;
+    }
+    .emoji-picker__emojis::-webkit-scrollbar,
+    .emoji-picker__container.search-results::-webkit-scrollbar {
+    display: none;
+    }
+    @-moz-document url-prefix() {
+        .emoji-picker__emojis,
+        .emoji-picker__container.search-results {
+            scrollbar-width: none;
+        }
+    }
+    </style>
+    <!-- <script src="dist/index.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/emoji-button@latest/dist/index.min.js"></script>
+</head>
+
+
+<body>
+    <h1><center> Test your emoji here (2) with button</center></h1>
+    <p>when you click in the textarea emoji list automatically opens on the right right-start.. </p>
+     <p> after each emoji click the emoji list closes</p>
+   
+    <div class="container">
+        <label for="">Your Comment</label>
+        <input type="button" id="btn-emoji" class="btnemoji" value="😀"/>
+        <!-- <button id="btn-emoji" class="btnemoji">😀</button> -->
+        <textarea id="text-comment" class="textarea" name="" id="" cols="30" rows="10"></textarea>
+    </div>
+
+    <script>
+  
+        const trigger = document.querySelector('#btn-emoji');
+        const picker = new EmojiButton({
+            emojiVersion: '12.1',
+            position : 'right-start', // auto-start, auto-end, top, top-start, top-end, right, right-start, right-end, bottom, bottom-start, bottom-end, left, left-start, left-end
+            showAnimation: false,// enable animation
+            autoHide: false,// auto close the emoji picker after selection
+            showCategoryButtons: true, // show category buttons
+            style: 'native',// or 'twemoji'
+            theme: 'auto',  // 'light', 'drak', or 'auto'
+            emojisPerRow: 8,// number of emojis per row
+            rows: 5,// number of rows
+        });
+
+        picker.on('emoji', emoji => {
+            document.querySelector('#text-comment').value += emoji;
+        });
+
+        trigger.addEventListener('click', () => picker.togglePicker(trigger));
+        // input.addEventListener('click', () => {
+        //     picker.pickerVisible ? picker.hidePicker() : picker.showPicker(input);
+        // });
+    
+    </script>
+</body>
+</html>
+
+<!-- SOURCES -->
+<!-- https://emoji-button.js.org/docs/ -->
+<!-- https://github.com/joeattardi/emoji-button -->
+<!-- https://www.jsdelivr.com/package/npm/@joeattardi/emoji-button -->
+<!-- https://www.cssscript.com/emoji-picker-button/ -->
+<!-- https://www.youtube.com/watch?v=4-e-EVsFo4A -->
+<!-- https://webcodeflow.com/add-emoji-button/ -->
+
+<!-- Node JS: Emoji in utf8 request returning � characters... see the link below -->
+<!-- https://stackoverflow.com/questions/60827366/node-js-emoji-in-utf8-request-returning-characters -->
+
+<!-- Cannot store emoji in database -->
+<!-- https://stackoverflow.com/questions/39326125/cannot-store-emoji-in-database -->
+<!-- https://mathiasbynens.be/notes/mysql-utf8mb4#utf8-to-utf8mb4 -->
+
+<!-- .net core conn str: Server=myServerAddress;Database=myDataBase;Uid=myUsername;Pwd=myPassword;
+CharSet=utf8mb4; -->
